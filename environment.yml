@@ -6,5 +6,6 @@ dependencies:
   - pip
   - moviepy
   - numpy
+  - opencv
   - pip:
     - tqdm

@@ -48,7 +48,7 @@ def image_to_video(image_dir, output_name, fps=24):
     final_clip = concatenate_videoclips(clips, method="compose")
 
     # fps로 설정하면, 총 프레임 수 = len(images), 총 길이 = len(images)*(1/fps)
-    final_clip.write_videofile(output_name, fps=fps, codec="libx264")
+    final_clip.write_videofile(output_name, fps=fps, codec="h264_nvenc")
 
 
 def image_to_video_gray16(image_dir, output_name, fps=24):
@@ -89,7 +89,7 @@ def image_to_video_gray16(image_dir, output_name, fps=24):
         clips.append(clip)
 
     final_clip = concatenate_videoclips(clips, method="compose")
-    final_clip.write_videofile(output_name, fps=fps, codec="libx264")
+    final_clip.write_videofile(output_name, fps=fps, codec="h264_nvenc")
 
 
 def image_to_video_color(image_dir, output_name, fps=24, use_colormap=True):
@@ -132,7 +132,7 @@ def image_to_video_color(image_dir, output_name, fps=24, use_colormap=True):
         clips.append(clip)
 
     final_clip = concatenate_videoclips(clips, method="compose")
-    final_clip.write_videofile(output_name, fps=fps, codec="libx264")
+    final_clip.write_videofile(output_name, fps=fps, codec="h264_nvenc")
 
 
 def video_composition2(video1_path, video2_path, output_name="composition2.mp4"):
@@ -144,7 +144,7 @@ def video_composition2(video1_path, video2_path, output_name="composition2.mp4")
 
     # clips_array([[clip1, clip2]]) -> 1행 2열(가로로 붙임)
     final_clip = clips_array([[clip1, clip2]])
-    final_clip.write_videofile(output_name, codec="libx264")
+    final_clip.write_videofile(output_name, codec="h264_nvenc")
 
 def video_composition4(video1_path, video2_path, video3_path, video4_path, output_name="composition4.mp4"):
     """
@@ -159,7 +159,7 @@ def video_composition4(video1_path, video2_path, video3_path, video4_path, outpu
     #               [c3, c4]]
     final_clip = clips_array([[c1, c2],
                               [c3, c4]])
-    final_clip.write_videofile(output_name, codec="libx264")
+    final_clip.write_videofile(output_name, codec="h264_nvenc")
 
 def video_slowmo(input_video, output_video, speed_factor):
     """
@@ -172,7 +172,7 @@ def video_slowmo(input_video, output_video, speed_factor):
     #   factor가 2.0 이면 2배 빠른 재생 -> 영상 길이는 절반
     #   factor가 0.5 이면 0.5배 빠른 재생 -> 실제로는 2배 느려짐
     modified_clip = clip.fx(vfx.speedx, speed_factor)
-    modified_clip.write_videofile(output_video, codec="libx264")
+    modified_clip.write_videofile(output_video, codec="h264_nvenc")
 
 def main():
     parser = argparse.ArgumentParser(description="Video Processing Tools")
